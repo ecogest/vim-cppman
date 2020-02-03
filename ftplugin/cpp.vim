@@ -34,6 +34,8 @@ function! s:reload()
   echo "Loading..."
   exec "%d"
   exec "0r! cppman --force-columns " . (winwidth(0) - 2) . " '" . g:page_name . "'"
+  exec "silent! %s/’/'/g"
+  normal! gg
   setl ro
   setl noma
   setl nomod
@@ -62,10 +64,11 @@ function! LoadNewPage()
 endfunction
 
 function! s:Cppman(page)
-  vertical bo new
+  tab new
   setlocal buftype=nofile
   setlocal bufhidden=delete
   setlocal noswapfile
+  setlocal filetype=cppman
 
   let g:page_name = a:page
 
@@ -80,7 +83,7 @@ function! s:Cppman(page)
     finish
   endif
 
-  syntax on
+  "syntax on
   syntax case ignore
   syntax match  manReference       "[a-z_:+-\*][a-z_:+-~!\*<>]\+([1-9][a-z]\=)"
   syntax match  manTitle           "^\w.\+([0-9]\+[a-z]\=).*"
@@ -106,11 +109,11 @@ function! s:Cppman(page)
       command -nargs=+ HiLink hi def link <args>
     endif
 
-    HiLink manTitle	    Title
+    HiLink manTitle	      Title
     HiLink manSectionHeading  Statement
-    HiLink manOptionDesc	    Constant
+    HiLink manOptionDesc      Constant
     HiLink manLongOptionDesc  Constant
-    HiLink manReference	    PreProc
+    HiLink manReference	      PreProc
     HiLink manSubHeading      Function
     HiLink manCFuncDefinition Function
 
@@ -129,7 +132,7 @@ function! s:Cppman(page)
   map <buffer> <C-]> K
   map <buffer> <2-LeftMouse> K
 
-  noremap <buffer> <C-o> :call BackToPrevPage()<CR>
+  noremap <buffer> <silent> <C-T> :call BackToPrevPage()<CR>
   map <buffer> <RightMouse> <C-o>
 
   let b:current_syntax = "man"
@@ -139,10 +142,14 @@ function! s:Cppman(page)
 
   " Open page
   call s:reload()
-  exec "0"
+  if v:shell_error
+    echo "No manual for '".g:page_name."'"
+    quit
+  else
+    exec "0"
+  endif
 endfunction
 
 command! -nargs=+ Cppman call s:Cppman(expand(<q-args>)) 
 setl keywordprg=:Cppman                                  
-setl iskeyword+=:,=,~,[,],*,!,<,>                        
-
+"setl iskeyword+=:,=,~,[,],*,!,<,> 

@@ -1,11 +1,15 @@
 # vim-cppman
 
+Based on gauteh's [vim-cppman](https://github.com/gauteh/vim-cppman). Modified
+by Beomjoon Goh to be used in new tab instead of opening in vertical split and
+to correct syntax highlighting crash with tabline.
+
 A plugin for using [*cppman*](https://github.com/aitjcize/cppman) from within
 Vim. *cppman* is used to lookup "C++ 98/11/14 manual pages for Linux/MacOS"
 through either [cplusplus.com](https://cplusplus.com) or
 [cppreference.com](https://cppreference.com).
 
-<img src="https://raw.githubusercontent.com/gauteh/vim-cppman/master/example.png"></img>
+<img src="https://raw.githubusercontent.com/BeomjoonGoh/vim-cppman/master/example.png"></img>
 
 Originally *cppman* uses Vim to page and syntax highlight the man page, but it
 is not set up to be used in buffer in an existing VIM instance. That is what
@@ -17,7 +21,8 @@ which is used for the Vim pager.
 
 ## Usage
 
-The `keywordprg` and `iskeyword`settings are automatically set for `C++` and `C` files. Otherwise use the same keybindings as in *cppman*:
+The `keywordprg` and `iskeyword`settings are automatically set for `C++` and
+`C` files. Otherwise use the same keybindings as in *cppman*:
 
 Move the cursor to the keyword and hit `K` to lookup the keyword in a new buffer.
 

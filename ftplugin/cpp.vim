@@ -33,8 +33,9 @@ function! s:reload()
   setl ma
   echo "Loading..."
   exec "%d"
-  exec "0r! cppman --force-columns " . (winwidth(0) - 2) . " '" . g:page_name . "'"
+  exec "0r! cppman --force-columns " . max([(winwidth(0) - 2),140]) . " '" . g:page_name . "'"
   exec "silent! %s/’/'/g"
+  exec "file ".g:page_name
   normal! gg
   setl ro
   setl noma

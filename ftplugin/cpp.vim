@@ -165,6 +165,6 @@ function! BackToPrevPage()
 endfunction
 
 
-command! -nargs=+ Cppman call s:Cppman(expand(<q-args>)) 
+command! -bar -nargs=1 Cppman call s:Cppman(<q-args>) 
 setl keywordprg=:Cppman                                  
 "setl iskeyword+=:,=,~,[,],*,!,<,> 

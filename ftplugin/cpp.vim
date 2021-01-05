@@ -26,6 +26,7 @@
 
 function! s:Cppman(page)
   enew
+  new
   setlocal bufhidden=delete
   setlocal noswapfile
   setlocal filetype=cppman

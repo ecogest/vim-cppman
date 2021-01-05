@@ -1,3 +1,4 @@
+" cppman.vim
 " This is essentially an adapted version of the cppman.vim script that is 
 " included with cppman. Authored by Wei-Ning Huang (AZ) <aitjcize@gmail.com>
 " and others.
@@ -16,53 +17,12 @@
 " You should have received a copy of the GNU General Public License
 " along with this program; if not, write to the Free Software Foundation,
 " Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-
-function! BackToPrevPage()
-  if len(g:stack) > 0
-    let context = g:stack[-1]
-    call remove(g:stack, -1)
-    let g:page_name = context[0]
-    call s:reload()
-    call setpos('.', context[1])
-  end
-endfunction
-
-function! s:reload()
-  setl noro
-  setl ma
-  echo "Loading..."
-  exec "%d"
-  exec "0r! cppman --force-columns " . max([(winwidth(0) - 2),140]) . " '" . g:page_name . "'"
-  exec "silent! %s/’/'/g"
-  exec "file ".g:page_name
-  normal! gg
-  setl ro
-  setl noma
-  setl nomod
-endfunction
-
-function! s:Rerender()
-  if winwidth(0) != s:old_col
-    let s:old_col = winwidth(0) 
-    let save_cursor = getpos(".")
-    call s:reload()
-    call setpos('.', save_cursor)
-  end
-endfunction
-
-function! LoadNewPage()
-  " Save current page to stack
-  call add(g:stack, [g:page_name, getpos(".")])
-  let g:page_name = expand("<cword>")
-  setl noro
-  setl ma
-  call s:reload()
-  normal! gg
-  setl ro
-  setl noma
-  setl nomod
-endfunction
+"
+"
+" Vim syntax file
+" Language:	Man page
+" Version Info:
+" Last Change:	2021 Jan 05
 
 function! s:Cppman(page)
   tab new
@@ -151,6 +111,54 @@ function! s:Cppman(page)
     exec "0"
   endif
 endfunction
+
+
+function! s:reload()
+  setl noro
+  setl ma
+  echo "Loading..."
+  exec "%d"
+  exec "0r! cppman --force-columns " . max([(winwidth(0) - 2),140]) . " '" . g:page_name . "'"
+  exec "silent! %s/’/'/g"
+  exec "file ".g:page_name
+  normal! gg
+  setl ro
+  setl noma
+  setl nomod
+endfunction
+
+function! s:Rerender()
+  if winwidth(0) != s:old_col
+    let s:old_col = winwidth(0) 
+    let save_cursor = getpos(".")
+    call s:reload()
+    call setpos('.', save_cursor)
+  end
+endfunction
+
+function! LoadNewPage()
+  " Save current page to stack
+  call add(g:stack, [g:page_name, getpos(".")])
+  let g:page_name = expand("<cword>")
+  setl noro
+  setl ma
+  call s:reload()
+  normal! gg
+  setl ro
+  setl noma
+  setl nomod
+endfunction
+
+function! BackToPrevPage()
+  if len(g:stack) > 0
+    let context = g:stack[-1]
+    call remove(g:stack, -1)
+    let g:page_name = context[0]
+    call s:reload()
+    call setpos('.', context[1])
+  end
+endfunction
+
 
 command! -nargs=+ Cppman call s:Cppman(expand(<q-args>)) 
 setl keywordprg=:Cppman                                  

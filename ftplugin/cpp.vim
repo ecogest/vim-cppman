@@ -25,7 +25,9 @@
 " Last Change:	2021 Jan 05
 
 function! s:Cppman(page)
-  new
+  " new
+  " tab new
+  enew
   setlocal bufhidden=delete
   setlocal noswapfile
   setlocal filetype=cppman
@@ -140,7 +142,9 @@ endfunction
 function! LoadNewPage()
   " Save current page to stack
   call add(g:stack, [g:page_name, getpos(".")])
-  let g:page_name = expand("<cWORD>")
+  setl iskeyword+=:
+  let g:page_name = expand("<cword>")
+  setl iskeyword-=:
   setl noro
   setl ma
   call s:reload()

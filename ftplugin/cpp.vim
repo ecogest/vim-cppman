@@ -119,6 +119,7 @@ function! s:reload()
   echo "Loading..."
   exec "%d"
   silent exec "0r! cppman --force-columns " . max([(winwidth(0) - 2),140]) . " '" . g:page_name . "'"
+  redraw | echo ""
   exec "silent! %s/’/'/g"
   exec "file ".g:page_name
   normal! gg

@@ -95,7 +95,7 @@ function! s:Cppman(page)
   map <buffer> <2-LeftMouse> K
 
   noremap <buffer> <silent> <C-T> :call BackToPrevPage()<CR>
-  map <buffer> <RightMouse> <C-o>
+  map <buffer> <RightMouse> <C-T>
 
   let b:current_syntax = "man"
 

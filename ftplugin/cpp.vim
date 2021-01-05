@@ -97,7 +97,8 @@ function! s:Cppman(page)
   syntax match manCFuncDefinition  display "\<\h\w*\>\s*("me=e-1 contained
 
   syntax region manSynopsis start="^SYNOPSIS"hs=s+8 end="^\u\+\s*$"me=e-12 keepend contains=manSectionHeading,@cppCode,manCFuncDefinition
-  syntax region manSynopsis start="^EXAMPLE"hs=s+7 end="^       [^ ]"he=s-1 keepend contains=manSectionHeading,@cppCode,manCFuncDefinition
+  " syntax region manSynopsis start="^EXAMPLE"hs=s+7 end="^       [^ ]"he=s-1 keepend contains=manSectionHeading,@cppCode,manCFuncDefinition
+  syntax region manSynopsis start="^EXAMPLE"hs=s+7 end="^[^ ].*$"re=s-1 keepend contains=manSectionHeading,@cppCode,manCFuncDefinition
 
   " Define the default highlighting.
   " For version 5.7 and earlier: only when not done already

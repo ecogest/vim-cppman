@@ -25,7 +25,6 @@
 " Last Change:	2021 Jan 05
 
 function! s:Cppman(page)
-  enew
   new
   setlocal bufhidden=delete
   setlocal noswapfile

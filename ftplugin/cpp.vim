@@ -25,7 +25,7 @@
 " Last Change:	2021 Jan 05
 
 function! s:Cppman(page)
-  tab new
+  enew
   setlocal buftype=nofile
   setlocal bufhidden=delete
   setlocal noswapfile

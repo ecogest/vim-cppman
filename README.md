@@ -3,6 +3,10 @@
 Fork of BeomjoonGoh's [vim-cppman](https://github.com/BeomjoonGoh/vim-cppman)
 which is based itself on gauteh's [vim-cppman](https://github.com/gauteh/vim-cppman).
 
+By default, `:Cppman <pattern>` opens result in a new buffer.
+The commands `Cppmant` `Cppmans` and `Cppmanv` respectively open the result in
+a tab, split, vertical split.
+
 A plugin for using [*cppman*](https://github.com/aitjcize/cppman) from within
 Vim. *cppman* is used to lookup "C++ 98/11/14 manual pages for Linux/MacOS"
 through either [cplusplus.com](https://cplusplus.com) or

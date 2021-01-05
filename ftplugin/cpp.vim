@@ -166,5 +166,9 @@ endfunction
 
 
 command! -bar -nargs=1 Cppman call s:Cppman(<q-args>) 
+command! -bar -nargs=1 Cppmant tabnew | call s:Cppman(<q-args>) 
+command! -bar -nargs=1 Cppmanv rightb vsp | call s:Cppman(<q-args>) 
+command! -bar -nargs=1 Cppmans split | call s:Cppman(<q-args>) 
+
 setl keywordprg=:Cppman                                  
 "setl iskeyword+=:,=,~,[,],*,!,<,> 

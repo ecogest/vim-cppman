@@ -26,7 +26,6 @@
 
 function! s:Cppman(page)
   enew
-  setlocal buftype=nofile
   setlocal bufhidden=delete
   setlocal noswapfile
   setlocal filetype=cppman
@@ -36,6 +35,7 @@ function! s:Cppman(page)
   setl nonu
   setl nornu
   setl noma
+  setl buftype=nofile
   noremap <buffer> q :q!<CR>
 
   if version < 600
@@ -46,7 +46,7 @@ function! s:Cppman(page)
 
   "syntax on
   syntax case ignore
-  syntax match  manReference       "[a-z_:+-\*][a-z_:+-~!\*<>()]\+([1-9][a-z]\=)"
+  syntax match  manReference       "[a-z_:+-\*][a-z_:+-~!\*<>()]\+ ([1-9][a-z]\=)"
   syntax match  manTitle           "^\w.\+([0-9]\+[a-z]\=).*"
   syntax match  manSectionHeading  "^[a-z][a-z_ \-:]*[a-z]$"
   syntax match  manSubHeading      "^\s\{3\}[a-z][a-z ]*[a-z]$"

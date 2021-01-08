@@ -24,6 +24,11 @@
 " Version Info:
 " Last Change:	2021 Jan 05
 
+if exists("b:cppman_loaded")
+  finish
+endif
+let b:cppman_loaded = 1
+
 function! s:Cppman(page)
   " new
   " tab new
